@@ -1,8 +1,8 @@
-import { CurrentInput } from './Input.styled';
+import { CurrentInput, CurrentLabel } from './Input.styled';
 
 export default function Input({type, name, patern,title,required, onChange}) {
   return(
-    <label>{name}
+    <CurrentLabel>{name}
       <CurrentInput
         type={type}
         name={name}
@@ -11,7 +11,7 @@ export default function Input({type, name, patern,title,required, onChange}) {
         required={required}
         onChange={onChange}
       />
-    </label>
+    </CurrentLabel>
   )
     
 }

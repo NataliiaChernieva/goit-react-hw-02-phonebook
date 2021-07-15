@@ -5,11 +5,11 @@ export const CustomButton = styled.button`
   border: none;
   border-radius:5px;
   outline: none;
-  padding: 8px 16px;
+  padding: 3px 12px;
   color: #fff;
   font-weight: bold;
-  font-size: 14px;
-  line-height: 24px;
+  font-size: 12px;
+  line-height: 16px;
   text-transform: uppercase;
   cursor: pointer;
 `;
