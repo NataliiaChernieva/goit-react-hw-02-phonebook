@@ -21,7 +21,7 @@ export default class Form extends Component {
         e.preventDefault();
       
         this.props.handleSubmit(this.state);
-        console.log('cntqn>', this.state);
+        // console.log('Стейт формы>', this.state);
         this.reset();
     };
 

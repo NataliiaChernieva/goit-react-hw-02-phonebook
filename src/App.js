@@ -7,10 +7,17 @@ import {
 } from './components/Container/Container.styled.jsx';
 import Form from './components/Form/Form.jsx';
 import ContactList from './components/ContactList/ContactList.jsx';
+import Input from './components/Input/Input.jsx';
 
 export default class App extends Component {
   state = {
-    contacts: [],
+    contacts: [
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    ],
+    filter: '',
   };
 
   formSubmitHandle = ({ name, number }) => {
@@ -21,24 +28,46 @@ export default class App extends Component {
       : this.setState(prevState => ({
           contacts: [...prevState.contacts, contact],
         }));
-    console.log(this.state);
+    console.log(contact);
   };
 
-  handleDelete = id => {
+  handleDelete = contactId => {
+    console.log(contactId);
     this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== id),
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
     }));
   };
 
+  changeFilter = e => {
+    this.setState({ filter: e.target.value });
+  };
+
+  getFilteredContacts = () => {
+    const { contacts, filter } = this.state;
+    const normaliseFilter = filter.toLowerCase();
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normaliseFilter),
+    );
+  };
+
   render() {
+    const { filter } = this.state;
+    const filteredContacts = this.getFilteredContacts();
+
     return (
       <Container>
         <Title>Phonebook</Title>
         <Form handleSubmit={this.formSubmitHandle} />
         <SectionTitle>Contacts</SectionTitle>
+        <Input
+          name="Find contacts by name"
+          type="text"
+          value={filter}
+          onChange={this.changeFilter}
+        />
         <ContactList
-          contacts={this.state.contacts}
-          handleDeleteContact={this.handleDelete}
+          contacts={filteredContacts}
+          onDeleteContact={this.handleDelete}
         />
       </Container>
     );
